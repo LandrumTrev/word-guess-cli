@@ -46,18 +46,19 @@ var realLetter = {
     guessed: false
 };
 
-var userGuess = "c";
+var userGuess = "a";
 
 // ==========================================================================
 
 // CONSTRUCTING A new Letter
 var letter = new Letter();
+// console.log(letter);
 
 // ==========================================================================
 
 
 // CHECKING THE OUTPUT OF THE Letter constructor
-// console.log(letter.charChecker(userGuess, realLetter));
+console.log(letter.charChecker(userGuess, realLetter));
 // console.log(letter.charDisplay(realLetter));
 
 // ==========================================================================
@@ -91,19 +92,30 @@ var Word = function (currentWord) {
 
         this.objectLetterArray.push(objectLetter);
 
-
-
     }
     // console.log(this.objectLetterArray);
     // return this.objectLetterArray;
 
+    this.guessCheck = function (userLetter) {
 
+        for (let j = 0; j < this.objectLetterArray.length; j++) {
 
-    
+            var checked = letter.charChecker(userLetter, this.objectLetterArray[j]);
+            console.log(checked);
+
+        }
+        console.log(checked);
+        return checked;
+        // return this.objectLetterArray;
+
+    };
+
+    // console.log(this.guessCheck);
+
 };
 
 
 var thisWord = new Word(chosenWord);
-console.log(thisWord);
-// console.log(thisWord.objectLetterArray);
-
+// console.log(thisWord);
+console.log(thisWord.guessCheck(userGuess));
+console.log(thisWord.objectLetterArray);
