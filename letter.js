@@ -11,169 +11,61 @@
 // displays either a blank (unguessed letter) or displays a guessed letter
 // Letter constructor defines:
 
-// function characterDisplay() {} 
-// that returns either letter 
-// (if guessed === true) { return letter };
-// or a blank (underscore) 
-// (if guessed === FALSE) { return "_"};
+// Contains a constructor, Letter. 
+// This constructor should be able to either display an underlying character or a blank placeholder (such as an underscore), 
+// depending on whether or not the user has guessed the letter. That means the constructor should define:
 
-// function checker(guess) {} 
-// that takes a user guess letter and checks to see 
-// if(guess === theLetter)
-// IF true, guessed = true;
-// IF FALSE, decrement guessesRemaining--;
+//   * A string value to store the underlying character for the letter
+
+//   * A boolean value that stores whether that letter has been guessed yet
+
+//   * A function that returns the underlying character if the letter has been guessed, 
+//  or a placeholder (like an underscore) if the letter has not been guessed
+
+//   * A function that takes a character as an argument and checks it against the underlying character, 
+//  updating the stored boolean value to true if it was guessed correctly
 
 
-// var state = true;
-// console.log(state);
 
-// var realLetter = "a";
-var realLetter = {
+var aLetter = {
     char: "a",
     guessed: false
 };
-console.log(realLetter);
 
-var userGuess = "a";
-console.log(userGuess);
+var userGuess = "b";
 
+var Letter = function (aLetter) {
 
-// var Letter = function () {
+    // aLetter = {
+    //     char: aLetter,
+    //     guessed: false
+    // };
+    // console.log(aLetter);
 
-// this.charDisplay = function (char) {
-charDisplay = function (char) {
+    this.charChecker = function (uG, rL) {
 
-    // console.log("monkey butts");
-    return "mambo mamma";
+        if (uG === rL.char) {
+            rL.guessed = true;
+            return rL;
+        } else {
+            return rL;
+        }
+    };
 
+    this.charDisplay = function (theLet) {
 
+        if (theLet.guessed === true) {
+            return theLet.char;
+        } else {
+            return "_";
+        }
+    };
 };
 
-this.charGuess = function (char) {
+module.exports = Letter;
 
 
-};
+var letter = new Letter();
 
-
-// };
-
-// charDisplay();
-
-console.log(charDisplay());
-
-
-
-
-
-
-
-
-
-
-
-
-// variable for a letters value and whether it has been guessed
-// var theLetter = {
-//     char: "a",
-//     // guessed: FALSE
-// };
-
-
-// var Letter = function() {
-
-// // this.characterDisplay = function(userGuess, theLetter) {
-// characterDisplay = function(userGuess, theLetter) {
-//         // that returns either letter 
-
-//     if (userGuess === theLetter.char) {
-
-//         return theLetter.char;
-
-//     } else {
-
-//         return "_";
-
-//     }
-// };
-
-// this.checker(guess) {}
-// // that takes a user guess letter and checks to see 
-
-// if (guess === theLetter) {
-//     // IF true, guessed = true;
-
-// } else {
-//     // IF FALSE, decrement guessesRemaining--;
-
-// }
-
-// };
-
-// Letter.characterDisplay("q");
-// characterDisplay("q",theLetter);
-
-// console.log(characterDisplay());
-// console.log(theLetter);
-
-// module.exports = Letter;
-
-
-
-// // Create the TV constructor
-// var TV = function () {
-// // divider will be used as a spacer between the tv data we print in log.txt
-// var divider = "\n------------------------------------------------------------\n\n";
-
-// // findShow takes in the name of a tv show and searches the tvmaze API
-// this.findShow = function (show) {
-//     var URL = "http://api.tvmaze.com/singlesearch/shows?q=" + show;
-
-//     request(URL, function (err, response, body) {
-//         // Parse the response body (string) to a JSON object
-//         var jsonData = JSON.parse(body);
-
-//         // showData ends up being the string containing the show data we will print to the console
-//         var showData = [
-//             "Show: " + jsonData.name,
-//             "Genre(s): " + jsonData.genres.join(", "),
-//             "Rating: " + jsonData.rating.average,
-//             "Network: " + jsonData.network.name,
-//             "Summary: " + jsonData.summary
-//         ].join("\n\n");
-
-//         // Append showData and the divider to log.txt, print showData to the console
-//         fs.appendFile("log.txt", showData + divider, function (err) {
-//             if (err) throw err;
-//             console.log(showData);
-//         });
-//     });
-// };
-
-// findActor takes in the name of an actor to search for
-// this.findActor = function (actor) {
-//     var URL = "http://api.tvmaze.com/search/people?q=" + actor;
-
-//     request(URL, function (err, response, body) {
-//         // Parse the response body (string) to a JSON object
-//         // Grab the first index of the response array, access the object at the `person` key
-//         var jsonData = JSON.parse(body)[0].person;
-
-//         // actorData ends up being the string containing the show data we will print to the console
-//         var actorData = [
-//             "Name: " + jsonData.name,
-//             "Birthday: " + jsonData.birthday,
-//             "Gender: " + jsonData.gender,
-//             "Country: " + jsonData.country.name,
-//             "URL: " + jsonData.url
-//         ].join("\n\n");
-
-//         // Append actorData and the divider to log.txt, print showData to the console
-//         fs.appendFile("log.txt", actorData + divider, function (err) {
-//             if (err) throw err;
-//             console.log(actorData);
-//         });
-//     });
-// };
-// };
-
-// module.exports = TV;
+console.log(letter.charChecker(userGuess, aLetter));
+console.log(letter.charDisplay(aLetter));
