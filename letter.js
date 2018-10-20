@@ -27,45 +27,60 @@
 
 
 
-var aLetter = {
-    char: "a",
-    guessed: false
-};
+// var aLetter = {
+//     char: "a",
+//     guessed: false
+// };
 
-var userGuess = "b";
+// var aLetter = "b";
+// var userGuess = "b";
 
 var Letter = function (aLetter) {
 
-    // aLetter = {
-    //     char: aLetter,
-    //     guessed: false
-    // };
-    // console.log(aLetter);
 
+    // return the letter object with it's "guessed:" property changed or not
     this.charChecker = function (uG, rL) {
 
         if (uG === rL.char) {
+            // if user guesses the letter, change "guessed:" to true
             rL.guessed = true;
             return rL;
         } else {
+            // otherwise, return the letter object unchanged
             return rL;
         }
     };
+
 
     this.charDisplay = function (theLet) {
 
         if (theLet.guessed === true) {
+            // display the letter if "guessed:" is true
             return theLet.char;
         } else {
+            // or display "_" if "guessed:" is false
             return "_";
         }
     };
+
+
+    // create a new letter object when calling a "new Letter(arrayLetter)"
+    aLetter = {
+        char: aLetter,
+        guessed: false
+    };
+
+    // return a new letter object as the value of an instance "new Letter(arrayLetter)"
+    // console.log(aLetter);
+    return aLetter;
+
+
 };
 
 module.exports = Letter;
 
 
-var letter = new Letter();
+// var letter = new Letter();
 
-console.log(letter.charChecker(userGuess, aLetter));
-console.log(letter.charDisplay(aLetter));
+// console.log(letter.charChecker(userGuess, aLetter));
+// console.log(letter.charDisplay(aLetter));

@@ -38,37 +38,72 @@ var Letter = require("./letter.js");
 
 // ==========================================================================
 // ==========================================================================
-// ==========================================================================
 
+
+// INPUT VARIABLES FOR THE Letter constructor
 var realLetter = {
     char: "a",
     guessed: false
 };
 
-var userGuess = "a";
+var userGuess = "c";
 
 // ==========================================================================
 
+// CONSTRUCTING A new Letter
 var letter = new Letter();
 
-console.log(letter.charChecker(userGuess, realLetter));
+// ==========================================================================
 
-console.log(letter.charDisplay(realLetter));
+
+// CHECKING THE OUTPUT OF THE Letter constructor
+// console.log(letter.charChecker(userGuess, realLetter));
+// console.log(letter.charDisplay(realLetter));
 
 // ==========================================================================
 // ==========================================================================
 // ==========================================================================
 
-var Word = function() {
+
+// DEMO WORD THAT WILL BE SELECTED BY index.js
+var chosenWord = "JABBERWOCKY";
+
+// new Word CONSTRUCTOR FUNCTION
+var Word = function (currentWord) {
+
+    this.objectLetterArray = [];
+
+    // make an Array out of chosenWord, passed in as (currentWord)
+    var wordArray = currentWord.split('');
+    // console.log(wordArray);
+
+    // loop through wordArray, and
+    for (let i = 0; i < wordArray.length; i++) {
+
+        // on each loop, have a variable stand for the letter element of the Array
+        var arrayLetter = wordArray[i];
+        // console.log(arrayLetter);
+
+        // then send each letter to "new Letter()" to turn it into an object
+        // which has char:'A', guessed: false
+        var objectLetter = new Letter(arrayLetter);
+        // console.log(objectLetter);
+
+        this.objectLetterArray.push(objectLetter);
 
 
 
-
-
-
+    }
+    // console.log(this.objectLetterArray);
+    // return this.objectLetterArray;
 
 
 
     
-}
+};
+
+
+var thisWord = new Word(chosenWord);
+console.log(thisWord);
+// console.log(thisWord.objectLetterArray);
 
