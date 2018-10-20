@@ -28,15 +28,27 @@
 
 
 // var aLetter = {
-//     char: "a",
+//     char: "b",
 //     guessed: false
 // };
 
-// var aLetter = "b";
-// var userGuess = "b";
+// var aLetter = "c";
+// var userGuess = "c";
 
-var Letter = function (aLetter) {
+var Letter = function () {
 
+    this.letterObject = function (lo) {
+
+        // create a new letter object when calling a "new Letter(arrayLetter)"
+        lo = {
+            char: lo,
+            guessed: false
+        };
+
+        // return a new letter object as the value of an instance "new Letter(arrayLetter)"
+        // console.log(aLetter);
+        return lo;
+    };
 
     // return the letter object with it's "guessed:" property changed or not
     this.charChecker = function (uG, rL) {
@@ -63,18 +75,6 @@ var Letter = function (aLetter) {
         }
     };
 
-
-    // create a new letter object when calling a "new Letter(arrayLetter)"
-    aLetter = {
-        char: aLetter,
-        guessed: false
-    };
-
-    // return a new letter object as the value of an instance "new Letter(arrayLetter)"
-    // console.log(aLetter);
-    return aLetter;
-
-
 };
 
 module.exports = Letter;
@@ -82,5 +82,6 @@ module.exports = Letter;
 
 // var letter = new Letter();
 
+// console.log(letter.letterObject(aLetter));
 // console.log(letter.charChecker(userGuess, aLetter));
 // console.log(letter.charDisplay(aLetter));

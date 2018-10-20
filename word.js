@@ -58,7 +58,7 @@ var letter = new Letter();
 
 
 // CHECKING THE OUTPUT OF THE Letter constructor
-console.log(letter.charChecker(userGuess, realLetter));
+// console.log(letter.charChecker(userGuess, realLetter));
 // console.log(letter.charDisplay(realLetter));
 
 // ==========================================================================
@@ -101,10 +101,10 @@ var Word = function (currentWord) {
         for (let j = 0; j < this.objectLetterArray.length; j++) {
 
             var checked = letter.charChecker(userLetter, this.objectLetterArray[j]);
-            console.log(checked);
+            // console.log(checked);
 
         }
-        console.log(checked);
+        // console.log(checked);
         return checked;
         // return this.objectLetterArray;
 
@@ -118,4 +118,4 @@ var Word = function (currentWord) {
 var thisWord = new Word(chosenWord);
 // console.log(thisWord);
 console.log(thisWord.guessCheck(userGuess));
-console.log(thisWord.objectLetterArray);
+// console.log(thisWord.objectLetterArray);
