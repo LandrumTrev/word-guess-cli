@@ -85,28 +85,39 @@ var Word = function (theWord) {
 
     // ==========================================================================
 
-
+    // function that drives the game forward...
+    // on user input, call word.checkGuess(userInput)
     this.checkGuess = function (userGuess) {
 
         // loop through wordArray which holds the current state of all letter objects
         for (let k = 0; k < this.wordArray.length; k++) {
 
-
-
-
-
-            // // set a variable for each letter object
-            // var chkLtr = this.wordArray[k];
+            // make a variable for each letter object in the wordArray
+            var chkLtr = this.wordArray[k];
             // console.log(chkLtr);
-            // chkLtr.check(userGuess);
+
+            // if the user input character matches the character property of a letter object
+            if (userGuess === chkLtr.character) {
+                // console.log(chkLtr.character);
+
+                // then call the Letter.check() method and pass in the user input
+                // to have it change the letter object's guessed: property from false to true    
+                chkLtr.check(userGuess);
+                // console.log(chkLtr);
+
+                // then replace the current letter object with the updated letter object
+                // at the same location in the wordArray
+                this.wordArray[k] = chkLtr;
+            }
+
+            // console.log(this.wordArray);
 
         };
-
+        // and then with wordArray updated, call the word.makeWordString() method
+        // to make a new string with the guessed: true letter object characters displayed
+        this.makeWordString();
     };
 
-    // call this.checkGuess() to test its functionality
-    // this.checkGuess("y");
-    // console.log(this.checkGuess());
 
     // ==========================================================================
 
@@ -115,13 +126,16 @@ var Word = function (theWord) {
 module.exports = Word;
 
 
-// DEMO CODE FOR word.js
+// // DEMO CODE FOR word.js
 
-var word = new Word("jabberwocky");
-// console.log(word.letterArray);
-word.makeWordArray();
-// console.log(word.wordArray);
-word.makeWordString();
-console.log(word.wordString);
-word.checkGuess("y");
-console.log(word.checkGuess());
+// var word = new Word("jabberwocky");
+// // console.log(word.letterArray);
+// word.makeWordArray();
+// // console.log(word.wordArray);
+// word.makeWordString();
+// // console.log(word.wordString);
+// word.checkGuess("b");
+// word.checkGuess("y");
+// // console.log(word.checkGuess());
+// // console.log(word.wordArray);
+// console.log(word.wordString);

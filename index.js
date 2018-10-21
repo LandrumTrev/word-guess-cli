@@ -23,3 +23,28 @@ var Word = require("./word.js");
 
 var fs = require("fs");
 
+// ==========================================================================
+
+
+
+
+
+
+
+
+
+// ==========================================================================
+
+// DEMO CODE FOR word.js
+
+var word = new Word("jabberwocky");
+// console.log(word.letterArray);
+word.makeWordArray();
+// console.log(word.wordArray);
+word.makeWordString();
+// console.log(word.wordString);
+word.checkGuess("b");
+word.checkGuess("y");
+// console.log(word.checkGuess());
+// console.log(word.wordArray);
+console.log(word.wordString);
