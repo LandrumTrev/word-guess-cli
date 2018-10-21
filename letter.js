@@ -45,7 +45,7 @@ var Letter = function (char) {
 module.exports = Letter;
 
 
-// // DEMO CODE
+// // DEMO CODE for letter.js
 // var letter = new Letter("a");
 
 // console.log(letter.character); // a
