@@ -23,91 +23,110 @@ var Letter = require("./letter.js");
 // var word = new Word("jabberwocky");
 var Word = function (theWord) {
 
-    // An Array of `new` Letter objects representing the letters of the underlying word
+    // ==========================================================================
+
     // .split theWord passed in as theWord into an array of letters
     this.letterArray = theWord.split('');
+    // console.log(this.letterArray);
 
+    // ==========================================================================
 
-    // The master Array to hold the current state of all letter objects
-    this.letterObjectsArray = function () {
+    // An Array of `new` Letter objects representing the letters of the underlying word
+    this.wordArray = [];
 
-        // array to collect the return value of letterObjectsArray into
-        var letsArray = [];
+    // a function to call to make the initial wordArray (all guessed: false)
+    this.makeWordArray = function () {
+        for (let i = 0; i < this.letterArray.length; i++) {
+            var letterObject = new Letter(this.letterArray[i]);
+            this.wordArray.push(letterObject);
+        };
+    };
 
-        // forEach letter in the Array created out of the Word's letters...
-        this.letterArray.forEach(function (l) {
+    // // call this.makeWordArray() and console.log this.wordArray to check initial creation
+    // this.makeWordArray();
+    // console.log(this.wordArray);
 
-            // create a new Letter object variable for each letter
-            var letterObject = new Letter(l);
+    // ==========================================================================
 
-            // and then .push each Letter object's current displayed char or _ into the displayArray
-            letsArray.push(letterObject);
+    // the displayed output String, based on the current state of letter object in wordArray
+    this.wordString = "";
 
-        });
+    // a function to run the Letter.display() method,
+    // to determine whether to display the letter or _
+    this.makeWordString = function () {
 
-        // return letsArray as the value of letterObjectsArray
-        return letsArray;
+        // a temporary Array to hold the whole word of output determined by Letter.display()
+        var tempArray = [];
+
+        // loop through wordArray which holds the current state of all letter objects
+        for (let j = 0; j < this.wordArray.length; j++) {
+            // set a variable for each letter object
+            var ltr = this.wordArray[j];
+            // call Letter.display() on each letter object to determine letter or _ output
+            var dispLtr = ltr.display();
+            // and push the determined output into the tempArray
+            tempArray.push(dispLtr);
+        };
+        // console.log(tempArray);
+
+        // and then convert the filled tempArray into a String called displayStr
+        var displayStr = (tempArray.join(' '));
+        // console.log(displayStr);
+
+        // and make the value of this.wordString the String created by displayStr
+        this.wordString = displayStr;
 
     };
 
+    // call this.makeWordString() and console.log this.wordString to check initial creation
+    // this.makeWordString();
+    // console.log(this.wordString);
 
-    // A function that returns a string representing the word. 
-    // This should call the function on each letter object (the first function defined in `Letter.js`) 
-    // that displays the character or an underscore and concatenate those together.
-    this.displayString = function () {
 
-            // Array to hold the current display characters and/or _ for each letter
-            var displayArray = [];
+    // ==========================================================================
 
-            // forEach letter object in state-holding letterObjectsArray...
-            this.letterObjectsArray().forEach(function (ltrObj) {
 
-                // .push each Letter object's current displayed char or _ into the displayArray
-                displayArray.push(ltrObj.display());
+    this.checkGuess = function (userGuess) {
 
-            });
+        // a temporary Array to hold the whole word of letter objects updated by checkGuess()
+        var guessedArray = [];
 
-            // and then convert the filled displayArray into a displayString
-            var displayStr = (displayArray.join(' '));
+        // loop through wordArray which holds the current state of all letter objects
+        for (let k = 0; k < this.wordArray.length; k++) {
 
-            // and return the displayString as the value of word.displayString()
-            return displayStr;
+            // set a variable for each letter object
+            var chkLtr = this.wordArray[k];
+            // console.log(chkLtr);
 
-        // return "Alice in Wonderland";
+            // call Letter.display() on each letter object to determine letter or _ output
+            var updatedLtr = chkLtr.check(userGuess);
+            // console.log(updatedLtr);
+
+            // and push the determined output into the tempArray
+            guessedArray.push(updatedLtr);
+        };
+
+        // console.log(guessedArray);
 
     };
-    
 
-    // A function that takes a character as an argument and calls the guess function 
-    // on each letter object (the second function defined in `Letter.js`)
-    // this.guessLetter = function (guess) {
+    // call this.checkGuess() to test its functionality
+    this.checkGuess("o");
 
-    // };
+
+    // ==========================================================================
+
 };
 
 module.exports = Word;
 
+
 // DEMO CODE FOR word.js
 
 var word = new Word("jabberwocky");
-
-
 // console.log(word.letterArray);
-console.log(word.displayString());
-// console.log(word.letterObjectsArray());
-
-
-
-
-
-
-
-// // DEMO CODE for letter.js
-// var letter = new Letter("a");
-
-// console.log(letter.character); // a
-// console.log(letter.guessed); // false
-// console.log(letter.display()); // _
-// letter.check("a");
-// console.log(letter.guessed); // true
-// console.log(letter.display()); // a
+word.makeWordArray();
+// console.log(word.wordArray);
+word.makeWordString();
+console.log(word.wordString);
+word.checkGuess("o");

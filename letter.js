@@ -36,6 +36,8 @@ var Letter = function (char) {
     this.check = function (userGuess) {
         if (userGuess === this.character) {
             this.guessed = true;
+        } else {
+            this.guessed = false;
         }
     };
 
