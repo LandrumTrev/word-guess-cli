@@ -8,80 +8,49 @@
 // letter.js
 // contains the Letter constructor, used by word.js (Word constructor)
 
-// displays either a blank (unguessed letter) or displays a guessed letter
-// Letter constructor defines:
-
-// Contains a constructor, Letter. 
-// This constructor should be able to either display an underlying character or a blank placeholder (such as an underscore), 
-// depending on whether or not the user has guessed the letter. That means the constructor should define:
-
-//   * A string value to store the underlying character for the letter
-
-//   * A boolean value that stores whether that letter has been guessed yet
-
-//   * A function that returns the underlying character if the letter has been guessed, 
-//  or a placeholder (like an underscore) if the letter has not been guessed
-
-//   * A function that takes a character as an argument and checks it against the underlying character, 
-//  updating the stored boolean value to true if it was guessed correctly
+// constructor function for an individual letter
+// stores the letter's value and controls whether it is displayed or not
+// depending on whether it has been guessed by the user
 
 
+var Letter = function (char) {
 
-// var aLetter = {
-//     char: "b",
-//     guessed: false
-// };
+    //   * A string value to store the underlying character for the letter
+    this.character = char;
 
-// var aLetter = "c";
-// var userGuess = "c";
+    //   * A boolean value that stores whether that letter has been guessed yet
+    this.guessed = false;
 
-var Letter = function () {
-
-    this.letterObject = function (lo) {
-
-        // create a new letter object when calling a "new Letter(arrayLetter)"
-        lo = {
-            char: lo,
-            guessed: false
-        };
-
-        // return a new letter object as the value of an instance "new Letter(arrayLetter)"
-        // console.log(aLetter);
-        return lo;
-    };
-
-    // return the letter object with it's "guessed:" property changed or not
-    this.charChecker = function (uG, rL) {
-
-        if (uG === rL.char) {
-            // if user guesses the letter, change "guessed:" to true
-            rL.guessed = true;
-            return rL;
+    //   * A function that returns the underlying character if the letter has been guessed, 
+    //  or a placeholder (like an underscore) if the letter has not been guessed
+    this.display = function () {
+        if (this.guessed === true) {
+            return this.character;
         } else {
-            // otherwise, return the letter object unchanged
-            return rL;
+            return "_";
         }
     };
 
-
-    this.charDisplay = function (theLet) {
-
-        if (theLet.guessed === true) {
-            // display the letter if "guessed:" is true
-            return theLet.char;
-        } else {
-            // or display "_" if "guessed:" is false
-            return "_";
+    //   * A function that takes a character as an argument and checks it against the underlying character, 
+    //  updating the stored boolean value to true if it was guessed correctly
+    this.check = function (userGuess) {
+        if (userGuess === this.character) {
+            this.guessed = true;
         }
     };
 
 };
 
+// export the Letter constructor function, to be used by word.js
 module.exports = Letter;
 
 
-// var letter = new Letter();
+// // DEMO CODE
+// var letter = new Letter("a");
 
-// console.log(letter.letterObject(aLetter));
-// console.log(letter.charChecker(userGuess, aLetter));
-// console.log(letter.charDisplay(aLetter));
+// console.log(letter.character); // a
+// console.log(letter.guessed); // false
+// console.log(letter.display()); // _
+// letter.check("a");
+// console.log(letter.guessed); // true
+// console.log(letter.display()); // a
