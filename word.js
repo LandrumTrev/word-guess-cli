@@ -88,31 +88,25 @@ var Word = function (theWord) {
 
     this.checkGuess = function (userGuess) {
 
-        // a temporary Array to hold the whole word of letter objects updated by checkGuess()
-        var guessedArray = [];
-
         // loop through wordArray which holds the current state of all letter objects
         for (let k = 0; k < this.wordArray.length; k++) {
 
-            // set a variable for each letter object
-            var chkLtr = this.wordArray[k];
+
+
+
+
+            // // set a variable for each letter object
+            // var chkLtr = this.wordArray[k];
             // console.log(chkLtr);
+            // chkLtr.check(userGuess);
 
-            // call Letter.display() on each letter object to determine letter or _ output
-            var updatedLtr = chkLtr.check(userGuess);
-            // console.log(updatedLtr);
-
-            // and push the determined output into the tempArray
-            guessedArray.push(updatedLtr);
         };
-
-        // console.log(guessedArray);
 
     };
 
     // call this.checkGuess() to test its functionality
-    this.checkGuess("o");
-
+    // this.checkGuess("y");
+    // console.log(this.checkGuess());
 
     // ==========================================================================
 
@@ -129,4 +123,5 @@ word.makeWordArray();
 // console.log(word.wordArray);
 word.makeWordString();
 console.log(word.wordString);
-word.checkGuess("o");
+word.checkGuess("y");
+console.log(word.checkGuess());

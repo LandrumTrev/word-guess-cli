@@ -39,6 +39,7 @@ var Letter = function (char) {
         } else {
             this.guessed = false;
         }
+        return this.guessed;
     };
 
 };
