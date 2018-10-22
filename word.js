@@ -6,7 +6,7 @@
 // ====================================================
 
 // word.js
-// contains the Word contructor that depends on the Letter constructor
+// contains the Word constructor that depends on the Letter constructor
 
 // This is used to create an object representing the current word the user is attempting to guess. 
 // That means the constructor should define:
