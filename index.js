@@ -71,7 +71,7 @@ function playGame() {
 
         // THIS CONSOLE.LOG() IS PART OF THE GAME:
         // IT DISPLAYS THE INITIAL ROW OF BLANK LETTERS
-        console.log(word.wordString);
+        console.log(word.wordString + '\n');
 
         // call the gamePlay() function to run the game and terminate when finished
         gamePlay(word);
@@ -89,18 +89,60 @@ function gamePlay(word) {
         .prompt({
             name: "letter",
             type: "input",
-            message: "\nGuess a letter!\n"
+            message: "Guess a letter!"
         })
         .then(function (answer) {
 
-            // call Word constructor's .checkGuess() method on user input
+
+            // call .checkGuess() method on whole word, passing in answer.letter
             // switches guessed: from false to true 
             // if input matches any letter's character: in Word
             word.checkGuess(answer.letter);
 
+
+            // GUESSES LEFT FUNCTIONALITY CURRENTLY NOT OPERATIONAL
+            // var guessesLeft = function () {
+
+            //     var guesses = 12;
+
+            //     var char;
+
+            //     function charList() {
+
+            //         for (let a = 0; a < word.wordArray.length; a++) {
+
+            //             char = word.wordArray[a].character;
+
+            //             if (answer.letter === char) {
+            //                 console.log("Awesome!");
+            //                 // console.log("Guesses left: " + guessesLeft);
+            //             } else {
+            //                 guesses = guesses--;
+            //                 console.log("Guesses left: " + guesses);
+            //             }
+        
+            //             // console.log(char);
+            //             return char;
+            //         }
+            //         // console.log(char);
+
+            //     };
+
+            //     charList();
+            //     console.log(charList());
+
+            //     return guesses;
+
+            // }
+
+
+            // THIS CONSOLE.LOG() IS PART OF THE GAME:
+            // IT DISPLAYS THE NUMBER OF GUESSES THE PLAYER HAS LEFT
+            // console.log(`You have ${guessesLeft()} guesses left.`);
+
             // THIS CONSOLE.LOG() IS PART OF THE GAME:
             // IT DISPLAYS THE CURRENTLY UPDATED ROW OF BLANK LETTERS
-            console.log(word.wordString);
+            console.log(word.wordString + '\n');
 
             // checks to see if .every() letter in wordArray is guessed: true
             var finishCheck = word.wordArray.every(function (letter) {
@@ -116,7 +158,8 @@ function gamePlay(word) {
                 // otherwise, if all letters guessed: true,
                 // ask if player wants another game
                 anotherGame()
-            }
+            };
+
         });
 };
 
