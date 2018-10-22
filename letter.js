@@ -7,11 +7,9 @@
 
 // letter.js
 // contains the Letter constructor, used by word.js (Word constructor)
-
 // constructor function for an individual letter
 // stores the letter's value and controls whether it is displayed or not
 // depending on whether it has been guessed by the user
-
 
 var Letter = function (char) {
 
@@ -22,7 +20,7 @@ var Letter = function (char) {
     this.guessed = false;
 
     // A function that returns the underlying character if the letter has been guessed, 
-    // or a placeholder (like an underscore) if the letter has not been guessed
+    // or a placeholder underscore if the letter has not been guessed
     this.display = function () {
         if (this.guessed === true) {
             return this.character;
@@ -49,8 +47,8 @@ module.exports = Letter;
 
 
 // // DEMO CODE for letter.js
-// var letter = new Letter("a");
 
+// var letter = new Letter("a");
 // console.log(letter.character); // a
 // console.log(letter.guessed); // false
 // console.log(letter.display()); // _
