@@ -17,6 +17,9 @@
 // word.js requires letter.js
 // letter.js (no requires)
 
+// ==========================================================================
+// ==========================================================================
+
 var inquirer = require("inquirer");
 
 var Word = require("./word.js");
@@ -24,56 +27,62 @@ var Word = require("./word.js");
 var fs = require("fs");
 
 // ==========================================================================
-
-
 // ==========================================================================
 
 function playGame() {
 
-    // use FS to read the random.txt file
+    // use FS to read the guesswords.txt file
     fs.readFile('./guesswords.txt', 'utf8', function read(err, data) {
 
         if (err) {
             throw err;
         }
 
-        // set a variable to stand for the text contents of the file
+        // ==========================================================================
+
+        // text content of guesswords.txt (newline delimited data)
         var randomWords = data;
         // console.log(randomWords);
 
-        // make the file data an Array, .split() at each new line
+        // newline .split() Array of guesswords.txt content
         wordsArray = randomWords.split('\n');
         // console.log(wordsArray);
 
-        // then get a random number between 1 and the length of wordsArray
+        // random number between 1 and wordsArray.length
         var randomNum = Math.floor(Math.random() * wordsArray.length) + 1;
         // console.log(randomNum);
 
-        // and use that random number to pick one line out of wordsArray
+        // random number picks one line out of wordsArray
         var randomLine = wordsArray[randomNum];
         // console.log(randomLine);
 
+        // ==========================================================================
+
+        // call new Word constructor on randomly selected guesswords.txt line
         var word = new Word(randomLine);
         // console.log(word);
 
-        // console.log(word.letterArray);
+        // call method of Word that creates Array of letter objects for the word
         word.makeWordArray();
         // console.log(word.wordArray);
+
+        // call method of Word that creates cli display String of word letters
         word.makeWordString();
+
+        // THIS CONSOLE.LOG() IS PART OF THE GAME:
+        // IT DISPLAYS THE INITIAL ROW OF BLANK LETTERS
         console.log(word.wordString);
-        // word.checkGuess("b");
-        // word.checkGuess("y");
-        // console.log(word.checkGuess());
-        // console.log(word.wordArray);
-        // console.log(word.wordString);
 
+        // call the gamePlay() function to run the game and terminate when finished
         gamePlay(word);
-
 
     });
 };
 
+// ==========================================================================
+// ==========================================================================
 
+// takes over for continuing game play after the initial playGame() starts game
 function gamePlay(word) {
 
     inquirer
@@ -84,28 +93,37 @@ function gamePlay(word) {
         })
         .then(function (answer) {
 
+            // call Word constructor's .checkGuess() method on user input
+            // switches guessed: from false to true 
+            // if input matches any letter's character: in Word
             word.checkGuess(answer.letter);
+
+            // THIS CONSOLE.LOG() IS PART OF THE GAME:
+            // IT DISPLAYS THE CURRENTLY UPDATED ROW OF BLANK LETTERS
             console.log(word.wordString);
 
-            // var theArray = word.wordArray;
-            // console.log(theArray);
-
+            // checks to see if .every() letter in wordArray is guessed: true
             var finishCheck = word.wordArray.every(function (letter) {
                 return letter.guessed === true;
             });
-            console.log(finishCheck);
+            // console.log(finishCheck);
 
+            // and if .every() letter is NOT guessed: true, then
             if (finishCheck === false) {
+                // call gamePlay() to guess the next letter
                 gamePlay(word);
             } else {
+                // otherwise, if all letters guessed: true,
+                // ask if player wants another game
                 anotherGame()
             }
-
         });
-
 };
 
+// ==========================================================================
+// ==========================================================================
 
+// after game play ends in gamePlay(), anotherGame() asks if player wants another game
 function anotherGame() {
 
     inquirer
@@ -116,17 +134,20 @@ function anotherGame() {
         })
         .then(function (answer) {
             if (answer.game === true) {
+                // if player wants to guess another word, then
                 console.log("\nYay! Guess another thing I'm thinking about!\n");
                 playGame();
-
             } else {
+                // otherwise say goodbye and end the game
                 console.log("\nOh, okay. I'm late for a very important date anyway. Bye!\n");
             }
         });
-
 };
 
+// ==========================================================================
+// ==========================================================================
 
+// the entry point into the game
 function intro() {
 
     inquirer
@@ -137,53 +158,23 @@ function intro() {
         })
         .then(function (answer) {
             if (answer.game === true) {
+                // if player wants start the game and guess the first word
                 console.log("\nWell alrighty then! Umm...guess what I'm thinking about!\n");
                 playGame();
-
             } else {
+                // otherwise, if they start the game, but don't want to play
                 console.log("Buh bye!");
             }
         });
-
 };
 
-
-intro();
-
-// inquirer
-//     .prompt({
-//         name: "game",
-//         type: "confirm",
-//         message: "Alice wants to know if you want to play a game? (It's not croquet)."
-//     })
-//     .then(function (answer) {
-//           if (answer.game === true) {
-//             readRandom();
-//             console.log(word.wordString);
-//         } else {
-//             console.log("Buh bye!");
-//           }
-//     });
-
-
+// ==========================================================================
 // ==========================================================================
 
+// call the intro() function to start the game
+intro();
 
-// DEMO CODE FOR word.js
+// ==========================================================================
+// ==========================================================================
 
-// var word = new Word("jabberwocky");
-// console.log(word.letterArray);
-// word.makeWordArray();
-// console.log(word.wordArray);
-// word.makeWordString();
-// console.log(word.wordString);
-// word.checkGuess("b");
-// word.checkGuess("y");
-// console.log(word.checkGuess());
-// console.log(word.wordArray);
-// console.log(word.wordString);
-
-
-
-// The Ambientalist - They Will Come Back
-// https://www.youtube.com/watch?v=F48ua-h8Bo8
+// fin
