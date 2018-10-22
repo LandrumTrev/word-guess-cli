@@ -7,10 +7,7 @@
 
 // word.js
 // contains the Word constructor that depends on the Letter constructor
-
 // This is used to create an object representing the current word the user is attempting to guess. 
-// That means the constructor should define:
-
 
 // ==========================================================================
 
@@ -19,22 +16,22 @@ var Letter = require("./letter.js");
 // ==========================================================================
 // ==========================================================================
 
-// constructor function for a new word from word, so in index.js:
-// var word = new Word("jabberwocky");
+// constructor function for a new word
 var Word = function (theWord) {
 
     // ==========================================================================
 
     // .split theWord passed in as theWord into an array of letters
+    // operated on by this.makeWordArray below
     this.letterArray = theWord.split('');
     // console.log(this.letterArray);
 
     // ==========================================================================
 
-    // An Array of `new` Letter objects representing the letters of the underlying word
+    // An Array of new Letter objects representing the letters of the underlying word
     this.wordArray = [];
 
-    // a function to call to make the initial wordArray (all guessed: false)
+    // a function to call to make the initial wordArray (all Letters.guessed: false)
     this.makeWordArray = function () {
         for (let i = 0; i < this.letterArray.length; i++) {
             var letterObject = new Letter(this.letterArray[i]);
@@ -51,8 +48,8 @@ var Word = function (theWord) {
     // the displayed output String, based on the current state of letter object in wordArray
     this.wordString = "";
 
-    // a function to run the Letter.display() method,
-    // to determine whether to display the letter or _
+    // a function to run the Letter.display() method and create this.wordString,
+    // to determine whether to display the letter or an underscore
     this.makeWordString = function () {
 
         // a temporary Array to hold the whole word of output determined by Letter.display()
@@ -81,7 +78,6 @@ var Word = function (theWord) {
     // call this.makeWordString() and console.log this.wordString to check initial creation
     // this.makeWordString();
     // console.log(this.wordString);
-
 
     // ==========================================================================
 
