@@ -4,6 +4,10 @@
 *Node.js, npm, node_modules (fs, inquirer), constructor functions, game play*
 _________________________________________________
 
+[[Wonderland Word Guess CLI demo movie](https://github.com/LandrumTrev/word-guess-cli/blob/master/Wonderland_CLI_demo.mp4)](https://github.com/LandrumTrev/word-guess-cli/blob/master/Wonderland_CLI_demo.mp4)
+
+_________________________________________________
+
 The Wonderland Word Guess CLI is a Command Line Interface node.js app that provides Alice in Wonderland themed hangman-style word guess game play. 
 
 Start game play with:
