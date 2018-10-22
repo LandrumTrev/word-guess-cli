@@ -39,8 +39,8 @@ function playGame() {
         }
 
         // ==========================================================================
-
-        var word = [];
+        // GETTING A RANDOM WORD FROM THE guesswords.txt FILE
+        // ==========================================================================
 
         // text content of guesswords.txt (newline delimited data)
         var randomWords = data;
@@ -58,11 +58,13 @@ function playGame() {
         var randomLine = wordsArray[randomNum];
         // console.log(randomLine);
 
+
+        // ==========================================================================
+        // CALLING THE Word CONSTRUCTOR FUNCTIONS ON THE SELECTED WORD
         // ==========================================================================
 
         // call new Word constructor on randomly selected guesswords.txt line
-        // var word = new Word(randomLine);
-        word = new Word(randomLine);
+        var word = new Word(randomLine);
         // console.log(word);
 
         // call method of Word that creates Array of letter objects for the word
@@ -72,49 +74,61 @@ function playGame() {
         // call method of Word that creates cli display String of word letters
         word.makeWordString();
 
+
+        // ==========================================================================
+        // OUTPUT THE INITIAL BLANK STRING TO CONSOLE AND CALL GAME PLAY FUNCTION
+        // ==========================================================================
+
         // THIS CONSOLE.LOG() IS PART OF THE GAME:
         // IT DISPLAYS THE INITIAL ROW OF BLANK LETTERS
         console.log(word.wordString + '\n');
 
         // call the gamePlay() function to run the game and terminate when finished
-        gamePlay(word,12);
+        gamePlay(word, 12);
 
     });
 };
 
+
 // ==========================================================================
 // ==========================================================================
 
-// takes over for continuing game play after the initial playGame() starts game
-function gamePlay(word,guesses) {
+
+// takes over for continuing game play after the initial playGame() setup
+function gamePlay(word, guesses) {
 
     inquirer
         .prompt({
             name: "letter",
             type: "input",
-            message: "Guess a letter!"
+            message: "Guess a letter!\n"
         })
         .then(function (answer) {
-
 
             // call .checkGuess() method on whole word, passing in answer.letter
             // switches guessed: from false to true 
             // if input matches any letter's character: in Word
             word.checkGuess(answer.letter);
-            console.log(answer.letter);
+            // console.log(answer.letter);
+
+            // ==========================================================================
+            // CHECKING IF PLAYER GUESSED A CORRECT LETTER; IF NOT, DECREMENT GUESSES
+            // ==========================================================================
 
             // Array of Booleans of whether answer.letter matched a letter in word
             var matchedArray = [];
 
-
+            // loop wordArray and create matchedArray of Booleans for a user guess match
             for (let b = 0; b < word.wordArray.length; b++) {
 
                 // variable to hold a Boolean state of whether player guessed a correct character
                 var matched;
 
+                // variable for the .character property of looped over array object
                 var matchChar = word.wordArray[b].character;
                 // console.log(matchChar);
 
+                // push true and false values into matchedArray
                 if (matchChar === answer.letter) {
                     matched = true;
                     matchedArray.push(matched);
@@ -124,35 +138,54 @@ function gamePlay(word,guesses) {
                 }
 
             }
-
+            // check matchedArray after it has been filled by the for loop
             // console.log(matchedArray);
 
+            // then check to see if any values in matchedArray are true
             if (matchedArray.includes(true)) {
-                // guesses = guesses + 1;
-                console.log("Awesome!");
-                // console.log("Guesses left: " + guesses);
-
+                // if a letter was matched, print happy message
+                console.log(`\nAwesome!`);
             } else {
+                // but if no letters were matched, subtract 1 from guesses left
                 guesses = guesses - 1;
-                // console.log("Guesses left: " + guesses);
-
             }
 
+
+            // ==========================================================================
+            // CHECKING TO SEE IF PLAYER HAS ANY MORE GUESSES LEFT; IF NOT, GAME OVER
+            // ==========================================================================
+
+            // check to see if there are more guesses left
             if (guesses < 1) {
+                // if there are no more guesses left
                 console.log("Oopsie daisy! You don't have any guesses left!")
+                // check to see if player wants to play again
                 anotherGame();
+                // reset the number of guesses
                 guesses = 12;
+                // AND RETURN! THIS IS A CRUCIAL PART OF CORRECT FUNCTIONALITY
                 return;
             } else {
-                console.log(`You have ${guesses} guesses left.`);
+                // otherwise just tell the player how many guesses are left
+                console.log(`\nYou have ${guesses} guesses left.\n`);
             }
 
+
+            // ==========================================================================
+            // AT THIS POINT, WRITE THE CURRENT STATE OF THE WORD STRING TO THE CONSOLE
+            // ==========================================================================
 
             // THIS CONSOLE.LOG() IS PART OF THE GAME:
             // IT DISPLAYS THE CURRENTLY UPDATED ROW OF BLANK LETTERS
             console.log(word.wordString + '\n');
 
+
+            // ==========================================================================
+            // IF USER HAS GUESSED EVERY LETTER IN WORD, WINNER WINNER CHICKEN DINNER
+            // ==========================================================================
+
             // checks to see if .every() letter in wordArray is guessed: true
+            // to see if the game is over or not
             var finishCheck = word.wordArray.every(function (letter) {
                 return letter.guessed === true;
             });
@@ -160,21 +193,27 @@ function gamePlay(word,guesses) {
 
             // and if .every() letter is NOT guessed: true, then
             if (finishCheck === false) {
-                // call gamePlay() to guess the next letter
-                gamePlay(word,guesses);
+                // call gamePlay() again to guess the next letter
+                gamePlay(word, guesses);
             } else {
                 // otherwise, if all letters guessed: true,
-                // ask if player wants another game
+                // print celebratory message
                 console.log("SQUEEEE! YOU WON!!");
+                // ask if player wants another game
                 anotherGame();
+                // and reset the number of guesses to 12
                 guesses = 12;
+                // and return; here it's not crucial for game function, but good form
+                return;
             };
 
         });
 };
 
+
 // ==========================================================================
 // ==========================================================================
+
 
 // after game play ends in gamePlay(), anotherGame() asks if player wants another game
 function anotherGame() {
@@ -197,8 +236,10 @@ function anotherGame() {
         });
 };
 
+
 // ==========================================================================
 // ==========================================================================
+
 
 // the entry point into the game
 function intro() {
@@ -207,7 +248,7 @@ function intro() {
         .prompt({
             name: "game",
             type: "confirm",
-            message: "Oh hai! I'm Alice. Want to play a game? (It's not croquet)."
+            message: "\nOh hai! I'm Alice. Want to play a game? (It's not croquet).\n"
         })
         .then(function (answer) {
             if (answer.game === true) {
@@ -230,4 +271,4 @@ intro();
 // ==========================================================================
 // ==========================================================================
 
-// fin
+// FIN
