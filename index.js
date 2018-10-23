@@ -42,12 +42,8 @@ function playGame() {
         // GETTING A RANDOM WORD FROM THE guesswords.txt FILE
         // ==========================================================================
 
-        // text content of guesswords.txt (newline delimited data)
-        var randomWords = data;
-        // console.log(randomWords);
-
         // newline .split() Array of guesswords.txt content
-        wordsArray = randomWords.split('\n');
+        wordsArray = data.split('\n');
         // console.log(wordsArray);
 
         // random number between 1 and wordsArray.length
@@ -124,18 +120,15 @@ function gamePlay(word, guesses) {
                 // variable to hold a Boolean state of whether player guessed a correct character
                 var matched;
 
-                // variable for the .character property of looped over array object
-                var matchChar = word.wordArray[b].character;
-                // console.log(matchChar);
-
-                // push true and false values into matchedArray
-                if (matchChar === answer.letter) {
+                // set a true or false value for var matched
+                if (word.wordArray[b].character === answer.letter) {
                     matched = true;
-                    matchedArray.push(matched);
                 } else {
                     matched = false;
-                    matchedArray.push(matched);
                 }
+
+                // then push each resulting matched Boolean value into matchedArray
+                matchedArray.push(matched);
 
             }
             // check matchedArray after it has been filled by the for loop
@@ -172,7 +165,7 @@ function gamePlay(word, guesses) {
 
 
             // ==========================================================================
-            // AT THIS POINT, WRITE THE CURRENT STATE OF THE WORD STRING TO THE CONSOLE
+            // AND THEN WRITE THE CURRENT STATE OF THE WORD STRING TO THE CONSOLE
             // ==========================================================================
 
             // THIS CONSOLE.LOG() IS PART OF THE GAME:
@@ -267,8 +260,3 @@ function intro() {
 
 // call the intro() function to start the game
 intro();
-
-// ==========================================================================
-// ==========================================================================
-
-// FIN
