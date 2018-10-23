@@ -55,7 +55,7 @@ function playGame() {
         // console.log(randomNum);
 
         // random number picks one line out of wordsArray
-        var randomLine = wordsArray[randomNum];
+        var randomLine = wordsArray[randomNum - 1];
         // console.log(randomLine);
 
 
@@ -253,7 +253,7 @@ function intro() {
         .then(function (answer) {
             if (answer.game === true) {
                 // if player wants start the game and guess the first word
-                console.log("\nWell alrighty then! Umm...guess what I'm thinking about!\n");
+                console.log("\nUmm...guess what I'm thinking about? Capitalization counts!\n");
                 playGame();
             } else {
                 // otherwise, if they start the game, but don't want to play
