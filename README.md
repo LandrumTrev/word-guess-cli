@@ -1,5 +1,5 @@
 # Wonderland Word Guess CLI 
-### A node.js command line interface (CLI) word-guess game from Wonderland
+### A Node.js CLI word-guess game from Wonderland
 
 *Node.js, npm, node_modules (fs, inquirer), constructor functions, game play*
 _________________________________________________
